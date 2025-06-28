@@ -1,12 +1,34 @@
-# React + Vite
+# 🎬 IMDb Movies App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, fast, and fully responsive movie search app built with **React**, **Vite**, and **Tailwind CSS**.  
+It uses the [TMDB API](https://www.themoviedb.org/) to fetch real-time movie data and display detailed movie information with an elegant UI.
 
-Currently, two official plugins are available:
+🌐 **Live Demo**:  
+👉 [https://imdb-movies-ashen.vercel.app](https://imdb-movies-ashen.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔍 **Search by Title** with debounce to limit unnecessary API calls
+- 📈 **Popular Movies** listed by default
+- 📄 **Movie Details Page** with:
+  - Poster image
+  - Title, Overview, Release Date
+  - Rating with star icon ⭐
+  - Language & Genres
+- 📱 **Mobile-friendly UI** using Tailwind responsive utilities
+- 🚀 Built using **Vite** for ultra-fast development and production builds
+
+---
+
+## 🛠 Technologies Used
+
+- **React**
+- **Vite**
+- **Tailwind CSS**
+- **TMDB API**
+- **Vercel** (deployment)
+
+---
+
