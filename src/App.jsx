@@ -47,20 +47,27 @@ const  App=()=>{
     }
   };
 
-  const fetchMovieDetailes=async(movieId)=>{
-    try{
-      const respone = await fetch(`${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
-
-      if (!respone.ok) throw new Error("Failed to fetch movie");
-
-      const data=await respone.json();
-      setSelectedMovie(data);
-      console.log(data); 
-    }catch (error) {
-      console.error("Error fetching movie detailes:", error);
+  const fetchMovieDetailes = async (movieId) => {
+    try {
+      const movieRes = await fetch(`${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
+      const videoRes = await fetch(`${API_BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`);
+  
+      if (!movieRes.ok || !videoRes.ok) throw new Error("Failed to fetch");
+  
+      const movieData = await movieRes.json();
+      const videoData = await videoRes.json();
+  
+      const trailer = videoData.results.find(
+        (v) => v.type === "Trailer" && v.site === "YouTube"
+      );
+  
+      movieData.trailerKey = trailer?.key || null;
+      setSelectedMovie(movieData);
+    } catch (error) {
+      console.error("Error fetching movie details:", error);
     }
-  }
-
+  };
+  
   useEffect(() => {
     fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
@@ -76,25 +83,9 @@ const  App=()=>{
 
       {selectedMovie ? (
         <section className="selected-movie">
-          {/* <button onClick={() => setSelectedMovie(null)} className="mb-4 underline cursor-pointer text-purple-400">
-            ← Back to results
-          </button>
-          <h2 className="text-3xl font-bold mb-2">{selectedMovie.title}</h2>
-          <p className="mb-4">{selectedMovie.overview}</p>
-          <img
-            src={
-              selectedMovie.poster_path
-                ? `https://image.tmdb.org/t/p/w500/${selectedMovie.poster_path}`
-                : '/no-movie.png'
-            }
-            alt={selectedMovie.title}
-            className="rounded mb-4"
-          />
-          <p>🎬 Released: {selectedMovie.release_date}</p>
-          <p>⭐ Rating: {selectedMovie.vote_average}</p>
-          <p>🌐 Language: {selectedMovie.original_language}</p> */
+          
           <MovieDiscription movie={selectedMovie} onBack={() => setSelectedMovie(null)}/>
-          }
+          
         </section>
       ) : (
         <>
